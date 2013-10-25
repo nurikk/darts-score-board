@@ -32,7 +32,7 @@ angular.module('score').controller('addScoreController', function ($scope){
     } else {
       user.score = new_score;
     }
-    $scope.score = 0;
+    $scope.score = '';
 
   }
 });

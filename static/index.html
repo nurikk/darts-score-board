@@ -4,35 +4,28 @@
   <title>darts scoreboard</title>
   <script src="./angular.js"></script>
   <script src="./app.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
-<style>
-  .winner {
-    color: red;
-    font-weight: bold;
-  }
-</style>
 <body ng-controller="scoreController">
-<input tabindex=-1 type="button" ng-click="add_user()" value="Add">
-<input tabindex=-1 type="button" ng-click="reset_game()" value="Reset">
+  <div class="application_wrapper">
+    <section class="user_block" ng-repeat="user in users">
+      <header ng-class="{winner: user.score <= 0}">
+        <h1 class="user_name" ng-click="sent_name_editable(this)">{{user.name}}</h1>
+        <h2 class="user_score">{{user.score}}</h2>
+      </header>
 
-<table>
-  <tr>
-    <td ng-click="sent_name_editable(this)" ng-repeat="user in users">{{user.name}}</td>
-  </tr>
+      <div class="user_score_input" ng-controller="addScoreController">
+        <form ng-submit="add_score(user)">
+          <input tabindex="{{$index + 1}}" ng-model="score" type="text">
+          <input tabindex=-1 type="button" ng-click="add_score(user)" value="Add Score" class="normal-button">
+        </form>
+      </div>
+    </section>
 
-  <tr>
-    <td ng-class="{winner: user.score <= 0}" ng-repeat="user in users">{{user.score}}</td>
-  </tr>
-
-  <tr>
-    <td ng-repeat="user in users" ng-controller="addScoreController">
-      <form ng-submit="add_score(user)">
-        <input tabindex="{{$index + 1}}" ng-model="score" type="text">
-        <input tabindex=-1 type="button" ng-click="add_score(user)">
-      </form>
-    </td>
-  </tr>
-
-</table>
+    <div class="buttons_wrapper">
+      <input tabindex=-1 type="button" ng-click="add_user()" value="Add User" class="add_user normal-button">
+      <input tabindex=-1 type="button" ng-click="reset_game()" value="Clear Board" class="clear_board contrast-button">
+    </div>
+  </div>
 </body>
 </html>
