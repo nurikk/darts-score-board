@@ -26,8 +26,10 @@
 
   <tr>
     <td ng-repeat="user in users" ng-controller="addScoreController">
-      <input ng-model="score" maxlength="3" type="number">
-      <input type="button" ng-click="add_score(user)">
+      <form ng-submit="add_score(user)">
+        <input ng-model="score" type="text">
+        <input type="button" ng-click="add_score(user)">
+      </form>
     </td>
   </tr>
 
