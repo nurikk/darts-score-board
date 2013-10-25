@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="score">
+<head>
+  <title>darts scoreboard</title>
+  <script src="./angular.js"></script>
+  <script src="./app.js"></script>
+</head>
+<style>
+  .winner {
+    color: red;
+    font-weight: bold;
+  }
+</style>
+<body ng-controller="scoreController">
+<input type="button" ng-click="add_user()" value="Add">
+<input type="button" ng-click="reset_game()" value="Reset">
+
+<table>
+  <tr>
+    <td ng-click="sent_name_editable(this)" ng-repeat="user in users">{{user.name}}</td>
+  </tr>
+
+  <tr>
+    <td ng-class="{winner: user.score <= 0}" ng-repeat="user in users">{{user.score}}</td>
+  </tr>
+
+  <tr>
+    <td ng-repeat="user in users" ng-controller="addScoreController">
+      <input ng-model="score" maxlength="3" type="number">
+      <input type="button" ng-click="add_score(user)">
+    </td>
+  </tr>
+
+</table>
+</body>
+</html>
