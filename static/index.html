@@ -12,8 +12,8 @@
   }
 </style>
 <body ng-controller="scoreController">
-<input type="button" ng-click="add_user()" value="Add">
-<input type="button" ng-click="reset_game()" value="Reset">
+<input tabindex=-1 type="button" ng-click="add_user()" value="Add">
+<input tabindex=-1 type="button" ng-click="reset_game()" value="Reset">
 
 <table>
   <tr>
@@ -27,8 +27,8 @@
   <tr>
     <td ng-repeat="user in users" ng-controller="addScoreController">
       <form ng-submit="add_score(user)">
-        <input ng-model="score" type="text">
-        <input type="button" ng-click="add_score(user)">
+        <input tabindex="{{$index + 1}}" ng-model="score" type="text">
+        <input tabindex=-1 type="button" ng-click="add_score(user)">
       </form>
     </td>
   </tr>
