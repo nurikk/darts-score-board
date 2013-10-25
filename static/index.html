@@ -7,25 +7,30 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body ng-controller="scoreController">
-  <div class="application_wrapper">
-    <section class="user_block" ng-repeat="user in users">
-      <header ng-class="{winner: user.score <= 0}">
-        <h1 class="user_name" ng-click="sent_name_editable(this)">{{user.name}}</h1>
-        <h2 class="user_score">{{user.score}}</h2>
-      </header>
+<div class="application_wrapper">
+  <section class="user_block" ng-repeat="user in users">
+    <header ng-class="{winner: user.score <= 0}">
+      <h1 class="user_name" contenteditable="true">{{user.name}}</h1>
 
-      <div class="user_score_input" ng-controller="addScoreController">
-        <form ng-submit="add_score(user)">
-          <input tabindex="{{$index + 1}}" ng-model="score" type="text">
-          <input tabindex=-1 type="button" ng-click="add_score(user)" value="Add Score" class="normal-button">
-        </form>
-      </div>
-    </section>
+      <h2 class="user_score">{{default_score - sum(user.score)}}</h2>
 
-    <div class="buttons_wrapper">
-      <input tabindex=-1 type="button" ng-click="add_user()" value="Add User" class="add_user normal-button">
-      <input tabindex=-1 type="button" ng-click="reset_game()" value="Clear Board" class="clear_board contrast-button">
+      <small>
+        <span ng-repeat="score in user.score">{{score}} <a href="#" ng-click="revert(user, $index)">x</a></span>
+      </small>
+    </header>
+
+    <div class="user_score_input">
+      <form ng-submit="add_score(user)">
+        <input tabindex="{{$index + 1}}" ng-model="score" type="text">
+        <input tabindex=-1 type="button" ng-click="add_score(user)" value="Add Score" class="normal-button">
+      </form>
     </div>
+  </section>
+
+  <div class="buttons_wrapper">
+    <input tabindex=-1 type="button" ng-click="add_user()" value="Add User" class="add_user normal-button">
+    <input tabindex=-1 type="button" ng-click="reset_game()" value="Clear Board" class="clear_board contrast-button">
   </div>
+</div>
 </body>
 </html>
